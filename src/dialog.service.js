@@ -51,4 +51,4 @@ class Dialog {
 
 }
 
-export const ModalDialogService = new Dialog();
+export const DialogService = new Dialog();
