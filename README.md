@@ -128,9 +128,9 @@ DialogService.success('This is a success message.');
 
 Name | Description | Default | Options
 --- | --- | --- | ---
-title | Change the modal title | `[type]` | -
-submitText | Change the modal submit text or set as `false` to hide | `Submit` | str || `false`
-cancelText | Change the modal cancel text or set as `false` to hide  | `Cancel` | str || `false`
+title | Change the modal title | `[type]` | str
+submitText | Change the modal submit text or set as `false` to hide | `Submit` | str or `false`
+cancelText | Change the modal cancel text or set as `false` to hide  | `Cancel` | str or `false`
 
 **modalConfig options**
 
