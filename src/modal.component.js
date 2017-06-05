@@ -141,6 +141,7 @@ export function ModalComponent(Vue) {
 }
 
 function ModalPromise() {
+  let self = this;
   this.resCb = null;
   this.errCb = null;
   this.catchCb = null;
@@ -158,12 +159,13 @@ function ModalPromise() {
   };
 
   this.defer = {
-    then: (res=null, err=null) => {
-      this.resCb = res;
-      this.errCb = err;
+    then(res=null, err=null) {
+      self.resCb = res;
+      self.errCb = err;
+      return this;
     },
-    catch: (err=null) => {
-      this.catchCb = err;
+    catch(err=null) {
+      self.catchCb = err;
     }
   };
 }

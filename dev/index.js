@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import { Modal } from '../src';
+import { VueModalDialog } from '../src';
 import { ModalService, ModalDialogService } from '../src';
 import { TestComponent } from './test.component';
 
 import './styles/main.scss';
 
-Vue.use(Modal);
+Vue.use(VueModalDialog);
 
 new Vue({
   el: '#app',
@@ -23,6 +23,10 @@ new Vue({
       ModalService.open(TestComponent).then(
           res => console.log('res', res),
           cancel => console.log('cancel',  cancel)
+      ).catch(
+          err => {
+            console.log('catch', err);
+          }
       )
     }
   }
