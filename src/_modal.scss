@@ -1,0 +1,105 @@
+$vue-modal-warning: #ffa75f !default;
+$vue-modal-error: #EF6455 !default;
+$vue-modal-success: #598c54 !default;
+
+body.modal--active {
+	overflow: hidden;
+}
+
+.modal-container {
+	position: fixed;
+	z-index: 1090;
+}
+
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(#404040, .8);
+	z-index: 0;
+	opacity: 0;
+	display: none;
+	transition: opacity 300ms ease;
+
+	&.active {
+		opacity: 1;
+	}
+}
+
+
+.modal-parent {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	overflow: auto;
+}
+
+.modal {
+	background-color: #fff;
+	border-radius: 0 0 4px 4px;
+	transition: opacity 300ms ease, transform 300ms ease;
+	display: block;
+	box-shadow: 0 1px 10px 4px rgba(#000, 0.2);
+	width: 400px;
+	margin: 0 auto 40px auto;
+	opacity: 1;
+	position: relative;
+	transform: translateY(-110%);
+
+	&.modal--active {
+		transform: translateY(0%);
+	}
+}
+
+.modal__header {
+	padding: 20px 20px 0 20px;
+	font-size: 1.2rem;
+	font-weight: 500;
+}
+
+.modal__body {
+	padding: 10px 20px 20px 20px;
+}
+
+.modal__footer {
+	padding: 0 20px 20px 20px;
+	text-align: right;
+	cursor: default;
+
+	.btn {
+		margin-left: 10px;
+	}
+}
+
+.modal--lg {
+	width: 700px;
+}
+
+.modal--warning {
+	border-top: solid 8px $vue-modal-warning;
+
+	.modal__header {
+		color: $vue-modal-warning;
+	}
+}
+
+.modal--error {
+	border-top: solid 8px $vue-modal-error;
+
+	.modal__header {
+		color: $vue-modal-error;
+	}
+}
+
+.modal--success {
+	border-top: solid 8px $vue-modal-success;
+
+	.modal__header {
+		color: $vue-modal-success;
+	}
+}
