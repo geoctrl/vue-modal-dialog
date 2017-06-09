@@ -23,7 +23,8 @@ module.exports = function() {
   config.output = {
     path: path.resolve(__dirname, isProd ? 'dist' : 'dev'),
     filename: '[name].js',
-    publicPath: '/'
+    publicPath: '/',
+    library: 'commonjs2'
   };
 
   if (isProd) {
@@ -33,27 +34,21 @@ module.exports = function() {
   // vue.js npm package is runtime-only - use the dist version to get the compiler
   config.resolve = {
     extensions: ['.js', '.scss', '.html'],
-    alias: isDev ? {
+    alias: {
       vue: 'vue/dist/vue.js'
-    } : {}
+    }
   };
 
   config.cache = true;
 
   if (isProd) {
     config.externals = {
-      vue: 'Vue',
-      rxjs: 'rxjs'
+      vue: 'Vue'
     };
   }
 
   config.module = {
     rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include
-      },
       {
         test: /.scss$/,
         loader: 'style-loader!css-loader!postcss-loader!sass-loader',
@@ -66,6 +61,15 @@ module.exports = function() {
       },
     ]
   };
+
+  if (isDev) {
+    config.module.rules.push({
+          test: /\.js$/,
+          loader: 'babel-loader',
+          include
+        }
+    )
+  }
 
 
   config.plugins = [
