@@ -1,8 +1,8 @@
 {
   "name": "vue-modal-dialog",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "",
-  "main": "dist/main.js",
+  "main": "src/index.js",
   "module": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --progress --inline --watch",
