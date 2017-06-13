@@ -8,7 +8,7 @@ A small but powerful modal system. Use it for:
 - Confirmations
 - Application features
 - Cat videos
-- Anything you want to do overlaying your application
+- Overlay all the things
 
 ## Install
 
