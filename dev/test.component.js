@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { ModalService, ModalDialogService } from '../src';
+import { ModalService, DialogService } from '../src';
 
 export const TestComponent = Vue.component('testComponent', {
   template: `
@@ -13,7 +13,7 @@ export const TestComponent = Vue.component('testComponent', {
 </div>`,
   methods: {
     submit() {
-      ModalDialogService.warning('are you sure?').then(
+      DialogService.warning('are you sure?').then(
           submit => ModalService.submit('things'),
           cancel => {}
       )

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { VueModalDialog } from '../src';
-import { ModalService, ModalDialogService } from '../src';
+import { ModalService, DialogService } from '../src';
 import { TestComponent } from './test.component';
 
 import './styles/main.scss';
@@ -17,7 +17,7 @@ new Vue({
 </div>`,
   methods: {
     openDialog() {
-      ModalDialogService.error('Are you sure you want to delete this?')
+      DialogService.error('Are you sure you want to delete this?')
     },
     openModal() {
       ModalService.open(TestComponent).then(
