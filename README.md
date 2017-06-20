@@ -46,7 +46,7 @@ Lastly, import the .scss file into your styles:
 
 ## Modal Service
 
-This module exposes a `ModalService`, which allows you to call modals from anywhere in your application. It's basically an instantiated function, using es6 modules to import it anywhere you need it.
+This module exposes a `ModalService`, which allows you to call modals from anywhere in your application.
 
 ### .open(Component[, config])
 
