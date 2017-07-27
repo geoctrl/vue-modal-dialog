@@ -51,7 +51,10 @@ export function ModalComponent(Vue) {
 
         let index = this.modalList.length - 1;
 
-        if (!this.active) this.activate();
+        if (!this.active) {
+          this.opening = true;
+          this.activate();
+        }
         this.animateModalIn(index);
       },
 
@@ -94,6 +97,12 @@ export function ModalComponent(Vue) {
           let el = this.$refs.modals[nextModalIndex];
           el.classList.add('modal--active');
         }, 100);
+        // after modal finishes opening
+        if (this.opening) {
+          setTimeout(() => {
+            this.opening = false;
+          }, 300);
+        }
       },
       animateModalOut(outModalIndex, cb) {
         let el = this.$refs.modals[outModalIndex];
@@ -113,11 +122,13 @@ export function ModalComponent(Vue) {
         setTimeout(() => {
           document.body.classList.remove('modal--active');
           this.$refs.backdrop.style.display = 'none';
-        }, 290);
+        }, 300);
         this.active = false;
       },
       backdropClick() {
-        if (this.modalIndex >= 0 && this.modalList[this.modalIndex].config.backdropClose) {
+        if (this.modalIndex >= 0 &&
+            this.modalList[this.modalIndex].config.backdropClose &&
+            this.opening === false) {
           this.cancel();
         }
       },
@@ -134,7 +145,8 @@ export function ModalComponent(Vue) {
         active: false,
         modalList: [],
         modalIndex: -1,
-        modalQueue: []
+        modalQueue: [],
+        opening: false
       }
     },
   });

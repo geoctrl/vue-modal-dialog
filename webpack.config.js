@@ -35,7 +35,7 @@ module.exports = function() {
   config.resolve = {
     extensions: ['.js', '.scss', '.html'],
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.esm.js'
     }
   };
 
