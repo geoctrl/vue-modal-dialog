@@ -154,6 +154,9 @@ body.modal--active {
 	display: flex;
 	flex-direction: column;
 	cursor: default;
+	resize: both;
+	overflow: auto;
+	z-index: 999;
 }
 
 .overlay__header {
