@@ -16,7 +16,7 @@ A small but powerful modal system. Use it for:
 $ npm install vue-modal-dialog
 ```
 
-import it and `use` it in your Vue(2) application. Also, add the component `<modal></modal>` to your template.
+import it and `use` it in your Vue(2) application. Also, add the component `<modal-dialog></modal-dialog>` to your template.
 This will be the modal output.
 
 ```js
@@ -30,7 +30,7 @@ new Vue({
   template: `
 <div>
   <app-stuff></app-stuff>
-  <modal></modal>
+  <modal-dialog></modal-dialog>
 </div>`
 });
 ```

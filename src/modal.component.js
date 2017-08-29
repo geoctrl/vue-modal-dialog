@@ -4,9 +4,18 @@ export function ModalComponent(Vue) {
   Vue.component('modal', {
     template: `
 <div class="modal-container">
-    <div class="modal-parent" v-for="(modal, index) in modalList" :style="{zIndex: index+1}" v-on:click="backdropClick()">
-        <div class="modal" ref="modals" :class="{'modal--md': modal.config.size=='md','modal--lg':modal.config.size=='lg', 'modal--warning': modal.config.type=='warning','modal--error': modal.config.type=='error','modal--success': modal.config.type=='success' }" v-on:click.stop>
-            <container v-bind:is="modal.component" :data="modal.config.data"></container>        
+    <div class="modal-parent"
+         v-for="(modal, index) in modalList"
+         :style="{zIndex: index+1}"
+         @click="backdropClick()">
+
+        <div class="modal"
+             ref="modals"
+             @click.stop
+             :class="modalClasses(modal.config)">
+            <container :is="modal.component"
+                       :data="modal.config.data">
+            </container>        
         </div>
     </div>
     <div class="modal-backdrop" ref="backdrop" :style="{zIndex: modalIndex}"></div>
@@ -17,6 +26,17 @@ export function ModalComponent(Vue) {
       document.addEventListener('keydown', this.keydownHandler);
 
     },
+
+    data() {
+      return {
+        active: false,
+        modalList: [],
+        modalIndex: -1,
+        modalQueue: [],
+        opening: false
+      }
+    },
+
     methods: {
       open(component, config) {
 
@@ -138,17 +158,18 @@ export function ModalComponent(Vue) {
             this.modalList[this.modalIndex].config.escapeClose){
           this.cancel();
         }
+      },
+
+      modalClasses(config) {
+        return {
+          'modal--md': config.size==='md',
+          'modal--lg': config.size==='lg',
+          'modal--warning': config.type==='warning',
+          'modal--error': config.type==='error',
+          'modal--success': config.type==='success'
+        }
       }
-    },
-    data() {
-      return {
-        active: false,
-        modalList: [],
-        modalIndex: -1,
-        modalQueue: [],
-        opening: false
-      }
-    },
+    }
   });
 }
 

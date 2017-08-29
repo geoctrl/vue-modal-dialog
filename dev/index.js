@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { VueModalDialog } from '../src';
-import { ModalService, DialogService } from '../src';
+import { ModalService, DialogService, OverlayService } from '../src';
+import { TestOverlayComponent } from './test-overlay';
 import { TestComponent } from './test.component';
 
 import './styles/main.scss';
@@ -11,11 +12,15 @@ new Vue({
   el: '#app',
   template: `
 <div>
-    <modal></modal>
-    <button v-on:click="openDialog()">Open dialog</button>
-    <button v-on:click="openModal()">Open Modal</button>
+    <modal-dialog></modal-dialog>
+    <button @click="openDialog()">Open dialog</button>
+    <button @click="openModal()">Open Modal</button>
+    <button @click="openOverlay()">Open Overlay</button>
 </div>`,
   methods: {
+    openOverlay() {
+      OverlayService.open(TestOverlayComponent, 'quality-check');
+    },
     openDialog() {
       DialogService.error('Are you sure you want to delete this?')
     },

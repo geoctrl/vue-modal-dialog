@@ -1,6 +1,6 @@
 
 function error() {
-  throw Error(`[vue-modal-dialog] The modal component (<modal>) must be placed in a template (preferable root).`);
+  throw Error(`[vue-modal-dialog] The modal-dialog component (<modal-dialog>) must be placed in a template (preferable root).`);
 }
 
 class Modal {

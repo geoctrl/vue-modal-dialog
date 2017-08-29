@@ -103,3 +103,80 @@ body.modal--active {
 		color: $vue-modal-success;
 	}
 }
+
+
+.overlay-wrapper {
+	user-select: none;
+}
+
+.overlay {
+	position: fixed;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 1px 10px 4px rgba(#000, 0.2);
+	left: 0;
+	top: 0;
+}
+
+.overlay__movable {
+	position: relative;
+	height: 20px;
+	cursor: move;
+
+	div {
+		position: relative;
+		height: 0;
+		padding-top: 10px;
+		margin: 0 auto 10px auto;
+		width: 14px;
+		border-bottom: solid 1px #d3d3d3;
+
+		&::before, &::after {
+			border-bottom: solid 1px #d3d3d3;
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+		}
+
+		&::before {
+			top: 7px;
+		}
+
+		&::after {
+			top: 13px;
+		}
+	}
+
+}
+
+.overlay {
+	display: flex;
+	flex-direction: column;
+	cursor: default;
+}
+
+.overlay__header {
+	padding: 0 14px 10px 14px;
+	font-size: 1.1rem;
+	font-weight: 500;
+	border-bottom: solid 1px #d3d3d3;
+}
+
+.overlay__body {
+	padding: 14px;
+	overflow: auto;
+	flex-grow: 1;
+	user-select: auto;
+}
+
+.overlay__footer {
+	padding: 10px;
+	text-align: right;
+	border-top: solid 1px #d3d3d3;
+
+	.btn {
+		margin-left: 10px;
+	}
+}
+
