@@ -13,7 +13,7 @@ A small but powerful modal system. Use it for:
 ## Install
 
 ```shell
-$ install vue-modal-dialog
+$ npm install vue-modal-dialog
 ```
 
 import it and `use` it in your Vue(2) application. Also, add the component `<modal></modal>` to your template.
