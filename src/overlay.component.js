@@ -1,4 +1,5 @@
 import { OverlayService } from './overlay.service';
+import { DeferPromise } from './utils';
 
 export function OverlayComponent(Vue) {
   Vue.component('overlay', {
@@ -11,8 +12,8 @@ export function OverlayComponent(Vue) {
          :style="{width:400+'px', height: 200+'px'}">
          <div slot="movable"
               class="overlay__movable"
-              @mousedown="startMove($event, key)"
-              @mouseup="stopMove($event)"><div></div></div>
+              @mousedown="startMove(key)"
+              @mouseup="stopMove()"><div></div></div>
     </div>
 </div>`,
 
@@ -22,28 +23,28 @@ export function OverlayComponent(Vue) {
 
     data() {
       return {
-        list: [],
-        minWidth: 300,
+        list: []
       }
     },
 
     methods: {
       open(component, id, config={}) {
+        if (this.list.find(item => item.id === id)) return;
+        let defer = new DeferPromise();
         this.list.push({
           id,
           component,
-          minWidth: config.minWidth || 400,
-          movable: !!config.movable,
-          sizable: !!config.sizable
+          defer
         });
+        return defer.defer;
       },
 
-      startMove(e, key) {
+      startMove(key) {
         this.movingEl = this.$refs.overlay[key].$el;
         document.addEventListener('mousemove', this.move);
       },
 
-      stopMove(e) {
+      stopMove() {
         document.removeEventListener('mousemove', this.move);
         this.movingEl = null;
       },
@@ -51,9 +52,27 @@ export function OverlayComponent(Vue) {
       move(e) {
         let x = parseInt(this.movingEl.style.left.replace('px', '')) || 0;
         let y = parseInt(this.movingEl.style.top.replace('px', '')) || 0;
-
         this.movingEl.style.left = (x + e.movementX) + 'px';
         this.movingEl.style.top = (y + e.movementY) + 'px';
+      },
+
+      submit(id, data) {
+        this.close(id, data, 'resolve');
+      },
+
+      cancel(id, data) {
+        this.close(id, data, 'reject');
+      },
+
+      close(id, data=null, respond) {
+        let overlay = this.list.find(item => {
+          return item.id === id;
+        });
+        overlay.defer[respond](data);
+        let index = this.list.findIndex(item => {
+          return item.id === id;
+        });
+        this.list = this.list.slice(0, index).concat(this.list.slice(index+1));
       }
     }
   });

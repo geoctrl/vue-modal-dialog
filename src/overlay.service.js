@@ -6,10 +6,14 @@ function error() {
 class Overlay {
   passComponent(overlay) {
     this.open = overlay.open;
+    this.submit = overlay.submit;
+    this.cancel = overlay.cancel;
   };
 
   // placeholder methods
-  open() { error() };
+  open()   { error() };
+  submit() { error() };
+  cancel() { error() };
 }
 
 export const OverlayService = new Overlay();

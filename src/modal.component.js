@@ -1,4 +1,5 @@
 import { ModalService } from './modal.service';
+import { DeferPromise } from './utils';
 
 export function ModalComponent(Vue) {
   Vue.component('modal', {
@@ -24,7 +25,6 @@ export function ModalComponent(Vue) {
     mounted() {
       ModalService.passComponent(this);
       document.addEventListener('keydown', this.keydownHandler);
-
     },
 
     data() {
@@ -40,8 +40,7 @@ export function ModalComponent(Vue) {
     methods: {
       open(component, config) {
 
-        let defer = new ModalPromise();
-        // let defer = deferObservable();
+        let defer = new DeferPromise();
 
         config = Object.assign({
           backdropClose: true,
@@ -65,6 +64,7 @@ export function ModalComponent(Vue) {
         }
         return defer.defer;
       },
+
       add(modal) {
         this.modalIndex++;
         this.modalList.push(modal);
@@ -103,14 +103,16 @@ export function ModalComponent(Vue) {
             this.deactivate();
           }
         }
-      }
-      ,
+      },
+
       submit(data=null) {
         this.close(true, data);
       },
+
       cancel(data=null) {
         this.close(false, data);
       },
+
       animateModalIn(nextModalIndex) {
         // the timeout gives time for the $refs to propagate
         setTimeout(() => {
@@ -124,11 +126,13 @@ export function ModalComponent(Vue) {
           }, 300);
         }
       },
+
       animateModalOut(outModalIndex, cb) {
         let el = this.$refs.modals[outModalIndex];
         el.classList.remove('modal--active');
         setTimeout(cb, 300)
       },
+
       activate() {
         document.body.classList.add('modal--active');
         this.$refs.backdrop.style.display = 'block';
@@ -137,6 +141,7 @@ export function ModalComponent(Vue) {
         }, 10);
         this.active = true;
       },
+
       deactivate() {
         this.$refs.backdrop.classList.remove('active');
         setTimeout(() => {
@@ -145,6 +150,7 @@ export function ModalComponent(Vue) {
         }, 300);
         this.active = false;
       },
+
       backdropClick() {
         if (this.modalIndex >= 0 &&
             this.modalList[this.modalIndex].config.backdropClose &&
@@ -152,6 +158,7 @@ export function ModalComponent(Vue) {
           this.cancel();
         }
       },
+
       keydownHandler(event) {
         if (event.key === 'Escape' &&
             this.modalIndex >= 0 &&
@@ -171,34 +178,4 @@ export function ModalComponent(Vue) {
       }
     }
   });
-}
-
-function ModalPromise() {
-  let self = this;
-  this.resCb = null;
-  this.errCb = null;
-  this.catchCb = null;
-
-  this.resolve = data => {
-    if (this.resCb) this.resCb(data);
-  };
-
-  this.reject = data => {
-    if (this.errCb) this.errCb(data);
-  };
-
-  this.err = data => {
-    if (this.catchCb) this.catchCb(data);
-  };
-
-  this.defer = {
-    then(res=null, err=null) {
-      self.resCb = res;
-      self.errCb = err;
-      return this;
-    },
-    catch(err=null) {
-      self.catchCb = err;
-    }
-  };
 }
