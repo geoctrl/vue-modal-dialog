@@ -1,6 +1,6 @@
 # Vue Modal (+ Dialog) Module
 
-A small but powerful modal system. Use it for:
+At only 3kb gzipped, `vue-modal-dialog` is a small but powerful modal system. Use it for:
 
 - Warnings
 - Error messages
