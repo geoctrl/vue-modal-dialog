@@ -2,10 +2,10 @@
   "name": "vue-modal-dialog",
   "version": "0.2.2",
   "description": "",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "module": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --history-api-fallback --progress --inline --watch",
+    "start": "webpack-dev-server --config ./webpack.config.dev.js",
     "build": "cp src/_modal.scss dist/ && webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,29 +14,27 @@
     "url": "git+https://github.com/geoctrl/vue-modal-dialog.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/geoctrl/vue-modal-dialog/issues"
   },
   "homepage": "https://github.com/geoctrl/vue-modal-dialog#readme",
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-env": "^1.5.1",
-    "css-loader": "^0.28.3",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "html-webpack-plugin": "^2.28.0",
-    "node-sass": "^4.5.3",
-    "postcss-loader": "^2.0.5",
-    "sass-loader": "^6.0.5",
-    "style-loader": "^0.18.1",
-    "vue": "^2.3.3",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
-  },
-  "dependencies": {
-    "rxjs": "^5.4.0",
-    "velocity-animate": "^1.5.0"
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^9.4.7",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "vue": "^2.6.2",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
   }
 }

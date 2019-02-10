@@ -1,4 +1,4 @@
-import { ModalService } from './modal.service';
+import { modalService } from './modal.service';
 import { DialogComponent } from './dialog.component';
 
 class Dialog {
@@ -40,7 +40,7 @@ class Dialog {
       cancelText: this.cancelText
     }, dialogConfig);
 
-    return ModalService.open(DialogComponent, Object.assign({
+    return modalService.open(DialogComponent, Object.assign({
           backdropClose: true,
           escapeClose: true,
           size: 'md',

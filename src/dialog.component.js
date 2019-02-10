@@ -1,31 +1,50 @@
 import Vue from 'vue';
-import { ModalService } from './modal.service';
+import { modalService } from './modal.service';
 
 export const DialogComponent = Vue.component('dialogComponent', {
-  template: `
-<div>
-    <div class="modal__header" v-show="data.title">
-        {{data.title}}
-    </div>
-    <div class="modal__body">
-        {{data.message}}
-    </div>
-    <div class="modal__footer">
-        <button class="btn btn--primary" v-on:click="submit()" v-show="data.submitText">
-            {{data.submitText}}
-        </button>
-        <button class="btn" v-on:click="cancel()" v-show="data.cancelText">
-            {{data.cancelText}}
-        </button>
-    </div>
-</div>`,
+  render(h) {
+    return h(
+      'div',
+      [
+        h(
+          'div',
+          {
+            class: { 'modal__header': true },
+            style: this.data.title ? {} : { display: 'none' },
+          },
+          this.data.title
+        ),
+        h(
+          'div',
+          { class: { 'modal__body': true } },
+          this.data.message
+        ),
+        h(
+          'div',
+          { class: { 'modal__footer': true } },
+          [
+            h(
+              'button',
+              {
+                class: { 'btn': true },
+                style: !this.data.cancelText ? { display: 'none' } : {},
+                on: { click: modalService.cancel },
+              },
+              this.data.cancelText
+            ),
+            h(
+              'button',
+              {
+                class: { 'btn': true, 'btn--primary': true },
+                style: !this.data.submitText ? { display: 'none' } : {},
+                on: { click: modalService.submit },
+              },
+              this.data.submitText
+            )
+          ]
+        ),
+      ]
+    )
+  },
   props: ['data'],
-  methods: {
-    submit() {
-      ModalService.submit();
-    },
-    cancel() {
-      ModalService.cancel();
-    }
-  }
 });

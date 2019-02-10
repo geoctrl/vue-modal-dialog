@@ -17,17 +17,15 @@ body.modal--active {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(#404040, .8);
+	background-color: rgba(#404040, .3);
 	z-index: 0;
 	opacity: 0;
-	display: none;
 	transition: opacity 300ms ease;
-
-	&.active {
-		opacity: 1;
-	}
 }
 
+.modal-backdrop--active {
+	opacity: 1;
+}
 
 .modal-parent {
 	position: fixed;
@@ -39,21 +37,55 @@ body.modal--active {
 	overflow: auto;
 }
 
+.modal-t-active,
+.modal-t-enter-active,
+.modal-t-enter-to,
+.modal-t-leave,
+.modal-t-leave-active,
+.modal-t-leave-to {
+	transition: opacity 300ms ease;
+}
+
+.modal-t-enter .modal {
+	transform: translateY(-110%);
+	opacity: 1;
+}
+
+.modal-t-enter-to .modal {
+	transform: translateY(0%);
+	opacity: 1;
+}
+
+.modal-t-leave-to .modal {
+	transform: translateY(-110%);
+}
+
+.backdrop-t-active {
+	display: block;
+}
+
+.backdrop-t-enter {
+	opacity: 0;
+}
+
+.backdrop-t-enter-to {
+	opacity: 1;
+}
+
+.backdrop-t-leave-to {
+	opacity: 0;
+}
+
 .modal {
 	background-color: #fff;
 	border-radius: 0 0 4px 4px;
-	transition: opacity 300ms ease, transform 300ms ease;
 	display: block;
 	box-shadow: 0 1px 10px 4px rgba(#000, 0.2);
 	width: 400px;
 	margin: 0 auto 40px auto;
 	opacity: 1;
 	position: relative;
-	transform: translateY(-110%);
-
-	&.modal--active {
-		transform: translateY(0%);
-	}
+	transition: opacity 300ms ease, transform 300ms ease;
 }
 
 .modal__header {
@@ -103,83 +135,3 @@ body.modal--active {
 		color: $vue-modal-success;
 	}
 }
-
-
-.overlay-wrapper {
-	user-select: none;
-}
-
-.overlay {
-	position: fixed;
-	border-radius: 4px;
-	background-color: #fff;
-	box-shadow: 0 1px 10px 4px rgba(#000, 0.2);
-	left: 0;
-	top: 0;
-}
-
-.overlay__movable {
-	position: relative;
-	height: 20px;
-	cursor: move;
-
-	div {
-		position: relative;
-		height: 0;
-		padding-top: 10px;
-		margin: 0 auto 10px auto;
-		width: 14px;
-		border-bottom: solid 1px #d3d3d3;
-
-		&::before, &::after {
-			border-bottom: solid 1px #d3d3d3;
-			content: '';
-			position: absolute;
-			left: 0;
-			right: 0;
-		}
-
-		&::before {
-			top: 7px;
-		}
-
-		&::after {
-			top: 13px;
-		}
-	}
-
-}
-
-.overlay {
-	display: flex;
-	flex-direction: column;
-	cursor: default;
-	resize: both;
-	overflow: auto;
-	z-index: 999;
-}
-
-.overlay__header {
-	padding: 0 14px 10px 14px;
-	font-size: 1.1rem;
-	font-weight: 500;
-	border-bottom: solid 1px #d3d3d3;
-}
-
-.overlay__body {
-	padding: 14px;
-	overflow: auto;
-	flex-grow: 1;
-	user-select: auto;
-}
-
-.overlay__footer {
-	padding: 10px;
-	text-align: right;
-	border-top: solid 1px #d3d3d3;
-
-	.btn {
-		margin-left: 7px;
-	}
-}
-

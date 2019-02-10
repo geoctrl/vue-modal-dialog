@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import { modalService, DialogService } from '../src';
-import { ChildChild } from "./child-child.component";
 
-export const TestComponent = Vue.component('testComponent', {
+export const ChildChild = Vue.component('childChildComponent', {
   template: `
 <div>
     <div class="modal__header">Modal</div>
     <div class="modal__body">
-      Doing real work
+      Are you sure?? sure sure???
       <br /> other things
       <br /> other things
       <br /> other things
@@ -19,8 +18,8 @@ export const TestComponent = Vue.component('testComponent', {
 </div>`,
   methods: {
     submit() {
-      modalService.open(ChildChild).then(
-          submit => modalService.submit(submit)
+      DialogService.warning('Last chance?').then(
+        submit => modalService.submit('He said he was sure')
       )
     },
     cancel() {
