@@ -1,7 +1,7 @@
 import { modalService } from './modal.service';
 import { DialogComponent } from './dialog.component';
 
-class Dialog {
+class DialogService {
   constructor() {
     this.submitText = 'Submit';
     this.cancelText = 'Cancel';
@@ -51,4 +51,4 @@ class Dialog {
 
 }
 
-export const DialogService = new Dialog();
+export const dialogService = new DialogService();

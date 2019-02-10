@@ -5,7 +5,7 @@ config.entry = path.resolve(__dirname, 'src/index.js');
 config.output = {
   filename: 'index.js',
   path: path.resolve(__dirname, 'build/'),
-  library: 'comfy',
+  library: 'vue-modal-dialog',
   libraryTarget: 'umd',
 };
 

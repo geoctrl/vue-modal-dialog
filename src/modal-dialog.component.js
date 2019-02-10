@@ -1,5 +1,12 @@
 export function ModalDialogComponent(Vue) {
   Vue.component('modalDialog', {
-    template: `<div><modal></modal></div>`
+    render(h) {
+      return h(
+        'div',
+        [
+          h('modal')
+        ]
+      )
+    },
   });
 }

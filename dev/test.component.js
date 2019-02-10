@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { modalService, DialogService } from '../src';
+import { modalService, dialogService } from '../src';
 import { ChildChild } from "./child-child.component";
 
 export const TestComponent = Vue.component('testComponent', {

@@ -10,13 +10,28 @@ A small but powerful modal system. Use it for:
 - Cat videos
 - Overlay all the things
 
+## v0.3.0 Update
+
+- No dependencies (removed rxjs and velocityJS)
+- updated dev dependencies
+- completely revamped and simplified modal system using vue animations
+- rewrote vue templates into render functions (ready for consumption for non-esm projects)
+- (breaking) renamed `ModalService` to `modalService`
+- (breaking) renamed `DialogService` to `dialogService`
+
 ## Install
 
+`Vue` is a peer dependency, so let's install that too: 
+
 ```shell
-$ npm install vue-modal-dialog
+# NPM
+$ npm install vue vue-modal-dialog
+
+# Yarn
+$ yarn add vue vue-modal-dialog
 ```
 
-import it and `use` it in your Vue(2) application. Also, add the component `<modal-dialog></modal-dialog>` to your template.
+import it and `use` it in your Vue application. Also, add the component `<modal-dialog></modal-dialog>` to your template.
 This will be the modal output.
 
 ```js
@@ -46,14 +61,14 @@ Lastly, import the .scss file into your styles:
 
 ## Modal Service
 
-This module exposes a `ModalService`, which allows you to call modals from anywhere in your application.
+This module exposes a `modalService`, which allows you to call modals from anywhere in your application.
 
 ### .open(Component[, config])
 
 Open up a new modal by passing in a Vue Component. Returns a deferred promise.
 
 ```js
-ModalService.open(DoThingsComponent).then(
+modalService.open(DoThingsComponent).then(
     modalSubmit => {},
     modalCancel => {}
 ).catch(
@@ -81,7 +96,7 @@ type | Extra Modal styles | none | `success`, `warning`, `error`
 // DoThingsComponent gets rendered in a modal
 
 import Vue from 'vue';
-import { ModalService } from 'VueModalDialog';
+import { modalService } from 'VueModalDialog';
 
 export const DoThingsComponent = Vue.component('doThings', {
   template:
@@ -95,10 +110,10 @@ export const DoThingsComponent = Vue.component('doThings', {
 </div>`,
   methods: {
     submit() {
-      ModalService.submit(); // resolve .open() promise
+      modalService.submit(); // resolve .open() promise
     },
     cancel() {
-      ModalService.cancel(); // reject .open() promise
+      modalService.cancel(); // reject .open() promise
     },
   }
 });
@@ -118,10 +133,10 @@ All four methods do the same thing, except they change the modal `type` to add s
 method doesn't add any styling.
 
 ```js
-DialogService.notice('This is a generic message.');
-DialogService.warning('This is a warning message.');
-DialogService.error('This is an error message.');
-DialogService.success('This is a success message.');
+dialogService.notice('This is a generic message.');
+dialogService.warning('This is a warning message.');
+dialogService.error('This is an error message.');
+dialogService.success('This is a success message.');
 ```
 
 **dialogConfig options**
@@ -134,7 +149,7 @@ cancelText | Change the modal cancel text or set as `false` to hide  | `Cancel` 
 
 **modalConfig options**
 
-Same as `ModalService.open()` config. See above for details.
+Same as `modalService.open()` config. See above for details.
 
 ## Stacked Modals
 
@@ -147,7 +162,7 @@ To do this, inside of a modal component, just create a new modal - which will ta
 // Example of a modal component opening a new modal on top of it on submit()
 
 import Vue from 'vue';
-import { ModalService } from 'VueModalDialog';
+import { modalService } from 'VueModalDialog';
 
 export const DoThingsComponent = Vue.component('doThings', {
   template:
@@ -162,22 +177,22 @@ export const DoThingsComponent = Vue.component('doThings', {
   methods: {
     submit() {
       // you can create a custom modal - passing in a component
-      ModalService.open(AnotherModalComponent).then(
+      modalService.open(AnotherModalComponent).then(
         submit => {
-          ModalService.submit(submit); // resolve .open() promise          
+          modalService.submit(submit); // resolve .open() promise          
         }  
       );
       // or you can create a confirmation dialog
-      DialogService.warning('Are you sure you want to delete this?', {
+      dialogService.warning('Are you sure you want to delete this?', {
         submitText: 'Delete',
         backdropClose: false,
         escapeClose: false
       }).then(
-        submit => ModalService.submit(submit) 
+        submit => modalService.submit(submit) 
       );
     },
     cancel() {
-      ModalService.cancel(); // reject .open() promise
+      modalService.cancel(); // reject .open() promise
     },
   }
 });

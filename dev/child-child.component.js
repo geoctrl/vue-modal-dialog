@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { modalService, DialogService } from '../src';
+import { modalService, dialogService } from '../src';
 
 export const ChildChild = Vue.component('childChildComponent', {
   template: `
@@ -18,7 +18,7 @@ export const ChildChild = Vue.component('childChildComponent', {
 </div>`,
   methods: {
     submit() {
-      DialogService.warning('Last chance?').then(
+      dialogService.warning('Last chance?').then(
         submit => modalService.submit('He said he was sure')
       )
     },
