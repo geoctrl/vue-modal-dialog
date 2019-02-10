@@ -1,7 +1,7 @@
-import { ModalService } from './modal.service';
+import { modalService } from './modal.service';
 import { DialogComponent } from './dialog.component';
 
-class Dialog {
+class DialogService {
   constructor() {
     this.submitText = 'Submit';
     this.cancelText = 'Cancel';
@@ -40,7 +40,7 @@ class Dialog {
       cancelText: this.cancelText
     }, dialogConfig);
 
-    return ModalService.open(DialogComponent, Object.assign({
+    return modalService.open(DialogComponent, Object.assign({
           backdropClose: true,
           escapeClose: true,
           size: 'md',
@@ -51,4 +51,4 @@ class Dialog {
 
 }
 
-export const DialogService = new Dialog();
+export const dialogService = new DialogService();
